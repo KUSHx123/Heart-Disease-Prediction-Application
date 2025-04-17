@@ -53,8 +53,11 @@ const PredictionComponent = () => {
     setLoading(true);
     try {
       console.log("Sending request with features:", features.map(Number));
-
-      const response = await fetch(`${API_URL}/predict`, {
+      
+      // Fix: Ensure no double slashes in the URL
+      const endpoint = API_URL.endsWith('/') ? `${API_URL}predict` : `${API_URL}/predict`;
+      
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ features: features.map(Number) }),
@@ -86,7 +89,7 @@ const PredictionComponent = () => {
 
   return (
     <div className="p-4 border rounded-lg shadow-md bg-white">
-      <h2 className="text-xl font-bold text-gray-700">Heart Disease Prediction Tool...!</h2>
+      <h2 className="text-xl font-bold text-gray-700">Heart Disease Prediction Tool</h2>
 
       {featureLabels.map((label, index) => (
         <div key={index} className="my-2">
