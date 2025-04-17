@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const API_URL = (import.meta.env.VITE_API_URL || "https://fastapi-heart-backend-production.up.railway.app/").trim();
+const API_URL = (import.meta.env.VITE_API_URL || "https://fastapi-heart-backend-production.up.railway.app").trim();
 
 const PredictionComponent = () => {
   const featureLabels = [
