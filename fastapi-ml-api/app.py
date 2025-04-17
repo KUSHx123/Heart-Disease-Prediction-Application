@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 # Enable CORS for frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # ✅ Match frontend URL
+    allow_origins=["https://heart-disease-prediction-application.vercel.app"],  # ✅ Match frontend URL
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
