@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 interface PredictionData {
@@ -18,8 +18,13 @@ interface PredictionData {
 }
 
 interface PredictionResponse {
-  prediction: string;
-  confidence?: number;
+  prediction: number;
+}
+
+interface PredictionHistory {
+  timestamp: string;
+  features: number[];
+  prediction: number;
 }
 
 const Predict = () => {
@@ -40,9 +45,22 @@ const Predict = () => {
   });
 
   const [prediction, setPrediction] = useState<string | null>(null);
-  const [confidence, setConfidence] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [history, setHistory] = useState<PredictionHistory[]>([]);
+
+  useEffect(() => {
+    fetchHistory();
+  }, []);
+
+  const fetchHistory = async () => {
+    try {
+      const response = await axios.get<{ history: PredictionHistory[] }>("/api/history");
+      setHistory(response.data.history.reverse()); // Show latest first
+    } catch (err) {
+      console.error("Error fetching history:", err);
+    }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -56,42 +74,22 @@ const Predict = () => {
     e.preventDefault();
     setError(null);
     setPrediction(null);
-    setConfidence(null);
-  
-    // Validation rules
-    const validationErrors: string[] = [];
-    if (formData.age <= 0 || formData.age > 120) validationErrors.push("Age must be between 1 and 120.");
-    if (formData.chol <= 0) validationErrors.push("Cholesterol must be a positive value.");
-    if (formData.trestbps <= 0) validationErrors.push("Resting Blood Pressure must be a positive value.");
-    if (formData.thalach <= 0) validationErrors.push("Max Heart Rate must be a positive value.");
-    if (formData.oldpeak < 0) validationErrors.push("ST Depression cannot be negative.");
-  
-    // Check if all fields have valid inputs
-    if (Object.values(formData).some((val) => val === 0)) {
-      validationErrors.push("All fields must be filled with valid values (0 is not allowed).");
-    }
-  
-    // If errors exist, show them
-    if (validationErrors.length > 0) {
-      setError(validationErrors.join(" "));
-      return;
-    }
-  
+
     setLoading(true);
     try {
-      const response = await axios.post<PredictionResponse>("/api/predict", formData);
-      
-      // Ensure `prediction` is treated as a number
-      const predictionValue = Number(response.data.prediction);
-  
-      // Map prediction to user-friendly message
+      const response = await axios.post<PredictionResponse>("/api/predict", {
+        features: Object.values(formData),
+      });
+
+      const predictionValue = response.data.prediction;
       const predictionMessage =
         predictionValue === 1
           ? "🚨 Heart Disease Detected! Please consult a doctor."
           : "✅ No Heart Disease Detected! Keep maintaining a healthy lifestyle.";
-  
+
       setPrediction(predictionMessage);
-      setConfidence(response.data.confidence ?? null);
+
+      fetchHistory(); // Refresh history after prediction
     } catch (err) {
       console.error("Error fetching prediction:", err);
       setError("Failed to fetch prediction. Please try again.");
@@ -99,8 +97,7 @@ const Predict = () => {
       setLoading(false);
     }
   };
-  
-  
+
   return (
     <div className="predict-container">
       <h2 className="title">Heart Disease Prediction</h2>
@@ -132,9 +129,24 @@ const Predict = () => {
         <div className="result">
           <h3>Prediction Result:</h3>
           <p>{prediction}</p>
-          {confidence !== null && <p>Confidence: {confidence.toFixed(2)}%</p>}
         </div>
       )}
+
+      <h3 className="history-title">Past Predictions</h3>
+      <ul className="history-list">
+        {history.length > 0 ? (
+          history.map((entry, index) => (
+            <li key={index} className="history-item">
+              <span>{new Date(entry.timestamp).toLocaleString()} - </span>
+              <strong>
+                {entry.prediction === 1 ? "🚨 Heart Disease Detected" : "✅ No Heart Disease"}
+              </strong>
+            </li>
+          ))
+        ) : (
+          <p>No past predictions found.</p>
+        )}
+      </ul>
     </div>
   );
 };

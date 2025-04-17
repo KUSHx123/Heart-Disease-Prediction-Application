@@ -5,6 +5,8 @@ import { useAuth } from '../context/AuthContext';
 import { supabase } from '../lib/supabase';
 import type { ProfileData } from '../types';
 import CountrySelect from '../components/CountrySelect';
+import 'react-phone-input-2/lib/style.css';
+import PhoneInput from 'react-phone-input-2';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -64,6 +66,27 @@ const Profile = () => {
     if (!formData.city || !formData.country) {
       setError('City and country are required');
       return false;
+    }
+
+    // Password validation
+    if (formData.newPassword || formData.confirmNewPassword || formData.currentPassword) {
+      // If any password field is filled, all must be filled
+      if (!formData.currentPassword || !formData.newPassword || !formData.confirmNewPassword) {
+        setError('All password fields are required to change password');
+        return false;
+      }
+
+      // Check if the new password is strong enough
+      if (formData.newPassword.length < 8) {
+        setError('New password must be at least 8 characters long');
+        return false;
+      }
+
+      // Check if passwords match
+      if (formData.newPassword !== formData.confirmNewPassword) {
+        setError('New passwords do not match');
+        return false;
+      }
     }
 
     return true;
@@ -127,14 +150,25 @@ const Profile = () => {
         }
       }
 
-      const { error: updateError } = await updateProfile({
+      // Prepare update data
+      const updateData = {
         fullName: formData.fullName,
-        avatarUrl,
+        avatarUrl: avatarUrl ?? undefined,
         gender: formData.gender,
         mobileNumber: formData.mobileNumber,
         city: formData.city,
         country: formData.country
-      });
+      };
+      
+      // Add password fields if provided
+      if (formData.currentPassword && formData.newPassword && formData.confirmNewPassword) {
+        Object.assign(updateData, {
+          currentPassword: formData.currentPassword,
+          newPassword: formData.newPassword
+        });
+      }
+
+      const { error: updateError } = await updateProfile(updateData);
 
       if (updateError) throw updateError;
 
@@ -143,6 +177,14 @@ const Profile = () => {
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
       }
+      
+      // Clear password fields after successful update
+      setFormData(prev => ({
+        ...prev,
+        currentPassword: '',
+        newPassword: '',
+        confirmNewPassword: ''
+      }));
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to update profile');
     } finally {
@@ -288,16 +330,25 @@ const Profile = () => {
                 <label htmlFor="mobileNumber" className="block text-sm font-medium text-gray-700">
                   Mobile Number
                 </label>
-                <input
-                  type="tel"
-                  id="mobileNumber"
+                <PhoneInput
+                  country={'in'}
                   value={formData.mobileNumber}
-                  onChange={(e) => setFormData({ ...formData, mobileNumber: e.target.value })}
-                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                  placeholder="+1234567890"
+                  onChange={(value) => setFormData({ ...formData, mobileNumber: `+${value}` })}
+                  inputProps={{
+                    name: 'mobileNumber',
+                    required: false,
+                    className: 'mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                  }}
+                  inputStyle={{
+                    width: '100%',
+                    height: '2.5rem',
+                    borderRadius: '0.375rem',
+                    borderColor: '#D1D5DB', // Tailwind border-gray-300
+                    paddingLeft: '48px',
+                    fontSize: '0.875rem',
+                  }}
                 />
               </div>
-
               <div className="col-span-2">
                 <CountrySelect
                   selectedCountry={formData.country}

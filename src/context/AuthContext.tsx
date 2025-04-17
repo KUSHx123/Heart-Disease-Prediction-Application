@@ -17,6 +17,8 @@ interface AuthContextType {
     mobileNumber?: string;
     city?: string;
     country?: string;
+    currentPassword?: string;
+    newPassword?: string;
   }) => Promise<{ error: Error | null }>;
 }
 
@@ -166,10 +168,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     mobileNumber?: string;
     city?: string;
     country?: string;
+    currentPassword?: string;
+    newPassword?: string;
   }) => {
     try {
       if (!user) throw new Error('No user logged in');
 
+      // Handle password change if provided
+      if (data.currentPassword && data.newPassword) {
+        const { error: passwordError } = await supabase.auth.updateUser({
+          password: data.newPassword,
+        });
+
+        if (passwordError) throw new Error(`Password update failed: ${passwordError.message}`);
+      }
+
+      // Update profile information
       const updates = {
         full_name: data.fullName,
         avatar_url: data.avatarUrl,
@@ -211,12 +225,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (error) throw error;
 
       // Update the user metadata in the session
-      if (data.fullName) {
-        const { error: updateError } = await supabase.auth.updateUser({
-          data: { full_name: data.fullName },
-        });
+      const updatedUserData = {
+        full_name: data.fullName,
+        avatar_url: data.avatarUrl,
+        gender: data.gender,
+        mobile_number: data.mobileNumber,
+        city: data.city,
+        country: data.country
+      };
+      
+      const { data: authData, error: updateError } = await supabase.auth.updateUser({
+        data: updatedUserData,
+      });
 
-        if (updateError) throw updateError;
+      if (updateError) throw updateError;
+      
+      // Update local user state
+      if (authData.user) {
+        setUser(authData.user);
       }
 
       return { error: null };

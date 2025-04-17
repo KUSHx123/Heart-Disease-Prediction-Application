@@ -3,9 +3,10 @@ import pandas as pd
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 from pydantic import BaseModel
-from typing import List
+from typing import List, Dict
 import joblib
 import logging
+from datetime import datetime
 
 # Initialize FastAPI app
 app = FastAPI()
@@ -42,6 +43,9 @@ FEATURE_NAMES = [
 class InputData(BaseModel):
     features: List[float]
 
+# Store predictions (in-memory storage)
+prediction_history: List[Dict] = []
+
 # API Route: Predict Heart Disease
 @app.post("/predict")
 async def predict(data: InputData):
@@ -63,13 +67,26 @@ async def predict(data: InputData):
         prediction = model.predict(input_df)[0]
         prediction = int(prediction)  # Ensure it's a Python integer
 
-        logger.info(f"✅ Prediction: {prediction}")
+        # Store the prediction in history
+        entry = {
+            "timestamp": datetime.now().isoformat(),
+            "features": data.features,
+            "prediction": prediction
+        }
+        prediction_history.append(entry)
+
+        logger.info(f"✅ Prediction: {prediction} (Stored in history)")
 
         return {"prediction": prediction}
 
     except Exception as e:
         logger.error(f"❌ Prediction error: {e}")
         return {"error": str(e)}
+
+# API Route: Get Prediction History
+@app.get("/history")
+async def get_history():
+    return {"history": prediction_history}
 
 # Health Check Route
 @app.get("/")
