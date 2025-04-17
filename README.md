@@ -15,9 +15,9 @@ An AI-powered web application that predicts the likelihood of heart disease base
 
 ### 🔙 Backend
 - Python 🐍
-- FastAPI ⚡ or Express.js (Node.js)
+- FastAPI ⚡
 - Machine Learning (scikit-learn, pandas, NumPy)
-- SQLite / MongoDB
+- Supabase
 
 ### 🔚 Frontend
 - React.js ⚛️
@@ -57,7 +57,7 @@ These models are trained on public datasets (e.g., [UCI Heart Disease Dataset](h
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/Heart-Disease-Prediction-Application.git
+git clone https://github.com/KUSHx123/Heart-Disease-Prediction-Application.git
 cd Heart-Disease-Prediction-Application
 ```
 
@@ -94,7 +94,7 @@ npm run dev
 
 1. Go to the homepage and fill in the medical parameters.
 2. Submit the form to get a real-time prediction.
-3. (Optional) Create an account to save your predictions.
+3. Create an account to save your predictions.
 4. View your previous results on the dashboard.
 
 ---
@@ -119,7 +119,7 @@ npm run dev
 ## 🤝 Contribution
 
 Contributions, issues and feature requests are welcome!  
-Feel free to check the [issues page](https://github.com/your-username/Heart-Disease-Prediction-Application/issues).
+Feel free to check the [issues page](https://github.com/KUSHx123/Heart-Disease-Prediction-Application/issues).
 
 ---
 
@@ -134,4 +134,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 **Kush**  
 📧 kushsinha960@gmail.com  
 🌐 [Portfolio](https://kush-portfolio52.netlify.app/)  
-🔗 [LinkedIn](https://www.linkedin.com/in/kush-raman-sinha-z52/) | [GitHub](https://github.com/your-username)
+🔗 [LinkedIn](https://www.linkedin.com/in/kush-raman-sinha-z52/) | [GitHub](https://github.com/KUSHx123)
