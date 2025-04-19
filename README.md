@@ -7,7 +7,7 @@ The Heart Disease Prediction project uses machine learning algorithms to predict
 ## Deployment
 
 Hosted on Vercel
-🔗 Live Demo 
+🔗 [Live Demo](https://heart-disease-prediction-application.vercel.app/)
 
 ## Features
 
@@ -91,5 +91,5 @@ You are free to use, share, and adapt the material for non-commercial purposes a
 
 ## Contact
 
-- **Kush**: [Email](mailto:your-email@example.com)
+- **Kush**: [Email](mailto:kushsinha960@gmail.com)
 - **GitHub**: [KUSHx123](https://github.com/KUSHx123)
