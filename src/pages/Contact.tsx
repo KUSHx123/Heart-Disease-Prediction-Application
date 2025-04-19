@@ -55,18 +55,18 @@ const Contact = () => {
                 <Phone className="h-6 w-6 text-blue-600 mt-1 mr-3" />
                 <div>
                   <h3 className="font-semibold text-gray-900">Phone</h3>
-                  <p className="text-gray-600">+1 (555) 123-4567</p>
+                  <p className="text-gray-600">+91 9667846370</p>
                 </div>
               </div>
 
               <div className="flex items-start">
                 <MapPin className="h-6 w-6 text-blue-600 mt-1 mr-3" />
                 <div>
-                  <h3 className="font-semibold text-gray-900">Office</h3>
+                  <h3 className="font-semibold text-gray-900">Hospital</h3>
                   <p className="text-gray-600">
-                    123 Health Avenue<br />
-                    San Francisco, CA 94105<br />
-                    United States
+                  Felix Hospital,<br />
+                  Paras Tierea, Sector 137,<br />
+                  Noida, Uttar Pradesh 201305
                   </p>
                 </div>
               </div>
@@ -80,7 +80,7 @@ const Contact = () => {
                 height="100%"
                 frameBorder="0"
                 style={{ border: 0 }}
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.0977724490648!2d-122.39568308439737!3d37.78989997975504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085807c23af40e7%3A0xa7f25a186f463d46!2s123%20Health%20Ave%2C%20San%20Francisco%2C%20CA%2094105!5e0!3m2!1sen!2sus!4v1635959攀搀攀"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2975.8123558443526!2d77.40588235357967!3d28.505926129850526!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce8f65d273d6d%3A0xfbcaf70cab153dfd!2sFelix%20Hospital!5e1!3m2!1sen!2sin!4v1745059017584!5m2!1sen!2sin"
                 allowFullScreen
                 loading="lazy"
               ></iframe>
