@@ -4,6 +4,11 @@
 
 The Heart Disease Prediction project uses machine learning algorithms to predict the likelihood of heart disease in individuals based on their medical data. This project employs various machine learning models, including Logistic Regression, Decision Trees, and Random Forest Classifiers, to make predictions based on user input.
 
+## Deployment
+
+Hosted on Vercel
+🔗 Live Demo 
+
 ## Features
 
 - Predict the likelihood of heart disease based on user input.
