@@ -1,137 +1,90 @@
-# ❤️ Heart Disease Prediction Application
+# Heart Disease Prediction
 
-An AI-powered web application that predicts the likelihood of heart disease based on medical parameters provided by the user. Built using Machine Learning and modern web technologies to assist healthcare professionals and individuals in making informed health decisions.
+## Project Overview
 
-## 🧠 Features
+The Heart Disease Prediction project uses machine learning algorithms to predict the likelihood of heart disease in individuals based on their medical data. This project employs various machine learning models, including Logistic Regression, Decision Trees, and Random Forest Classifiers, to make predictions based on user input.
 
-- 🩺 Predicts heart disease using trained ML models (Logistic Regression, Random Forest, SVM, etc.)
-- 📈 Visual representation of results and medical inputs
-- 🔒 Secure user authentication system
-- 🧾 Stores patient history for future reference (if authenticated)
-- 🌐 Country code and mobile number input with flag support (e.g., via `react-phone-input-2`)
-- 📊 Real-time prediction dashboard for analysis
+## Features
 
-## 🛠️ Tech Stack
+- Predict the likelihood of heart disease based on user input.
+- Type-safe integration with APIs using Axios.
+- Connection with Supabase for database operations.
+- User-friendly interface with React.
+- Real-time predictions with visual representation.
 
-### 🔙 Backend
-- Python 🐍
-- FastAPI ⚡
-- Machine Learning (scikit-learn, pandas, NumPy)
-- Supabase
+## Technologies Used
 
-### 🔚 Frontend
-- React.js ⚛️
-- TailwindCSS + DaisyUI for UI components
-- React Hook Form + Zod for form validation
-- Axios for API communication
+- **Frontend**: React, TypeScript, Axios, Tailwind CSS
+- **Backend**: FastAPI (for model integration and API)
+- **Database**: Supabase (for storing user prediction data)
+- **Machine Learning**: Python, scikit-learn (Logistic Regression, Random Forest, Decision Tree Classifiers)
+- **Hosting**: Vercel (for frontend), GitHub (for version control)
+- **Version Control**: Git
 
-### 🌍 Deployment
-- Vercel (Frontend)
-- Render / Railway / Heroku (Backend)
+## Installation
 
----
+To get started with the project locally:
 
-## 🧪 Machine Learning Models
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/KUSHx123/Heart-Disease-Prediction-Application.git
+   cd Heart-Disease-Prediction-Application
+   ```
 
-- Logistic Regression
-- Random Forest Classifier
-- Support Vector Machine (SVM)
-- KNN
+2. Install dependencies:
+   For the frontend:
+   ```bash
+   npm install
+   ```
 
-These models are trained on public datasets (e.g., [UCI Heart Disease Dataset](https://archive.ics.uci.edu/ml/datasets/heart+Disease)) and evaluated based on:
-- Accuracy
-- Precision
-- Recall
-- F1 Score
+   For the backend (FastAPI):
+   ```bash
+   pip install -r requirements.txt
+   ```
 
----
+3. Run the frontend:
+   ```bash
+   npm start
+   ```
 
-## 📷 Screenshots
+4. Run the backend (FastAPI):
+   ```bash
+   uvicorn main:app --reload
+   ```
 
-> Add screenshots or GIFs showing the prediction form, output, dashboard, and login screen.
+   Your application should now be running locally at `http://localhost:3000`.
 
----
+## How It Works
 
-## 📦 Installation
+- **Data Input**: Users provide their health data (age, sex, blood pressure, cholesterol, etc.) through the frontend form.
+- **Prediction**: The model predicts the likelihood of heart disease based on the input data.
+- **Database**: Predictions and user data are stored in the Supabase database.
+- **Results**: The results are displayed with appropriate messages (e.g., "Low Risk", "High Risk").
 
-### 1. Clone the repository
+## License
 
-```bash
-git clone https://github.com/KUSHx123/Heart-Disease-Prediction-Application.git
-cd Heart-Disease-Prediction-Application
-```
+This project is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International License**.
 
-### 2. Backend Setup
+You are free to use, share, and adapt the material for non-commercial purposes as long as you give appropriate credit.
 
-```bash
-cd backend
-pip install -r requirements.txt
-uvicorn main:app --reload
-```
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
 
-### 3. Frontend Setup
+## Contributing
 
-```bash
-cd frontend
-npm install
-npm run dev
-```
+1. Fork the repository.
+2. Create your feature branch (`git checkout -b feature-name`).
+3. Commit your changes (`git commit -m 'Add new feature'`).
+4. Push to the branch (`git push origin feature-name`).
+5. Open a pull request.
 
----
+## Acknowledgments
 
-## 📡 API Endpoints (FastAPI)
+- [scikit-learn](https://scikit-learn.org/) for the machine learning algorithms.
+- [Supabase](https://supabase.io/) for the database services.
+- [Vercel](https://vercel.com/) for the frontend deployment.
+- [FastAPI](https://fastapi.tiangolo.com/) for building the backend API.
 
-| Method | Endpoint            | Description                      |
-|--------|---------------------|----------------------------------|
-| POST   | `/predict`          | Get prediction from ML model     |
-| POST   | `/register`         | Create a new user                |
-| POST   | `/login`            | Authenticate user credentials    |
-| GET    | `/history/{user}`   | Get previous predictions (auth)  |
+## Contact
 
----
-
-## 🧑‍💻 Usage
-
-1. Go to the homepage and fill in the medical parameters.
-2. Submit the form to get a real-time prediction.
-3. Create an account to save your predictions.
-4. View your previous results on the dashboard.
-
----
-
-## 🔐 Authentication & Security
-
-- JWT-based user authentication
-- Data validation using Pydantic (FastAPI) and Zod (React)
-- Protected routes for dashboards and history
-
----
-
-## 🔮 Future Enhancements
-
-- 🧑‍⚕️ Integration with wearable device data (e.g., smartwatches)
-- 📧 Email alerts for high-risk predictions
-- 📱 Mobile app version (React Native or Flutter)
-- 📊 Admin panel to manage users and insights
-
----
-
-## 🤝 Contribution
-
-Contributions, issues and feature requests are welcome!  
-Feel free to check the [issues page](https://github.com/KUSHx123/Heart-Disease-Prediction-Application/issues).
-
----
-
-## 📜 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
----
-
-## 📞 Contact
-
-**Kush**  
-📧 kushsinha960@gmail.com  
-🌐 [Portfolio](https://kush-portfolio52.netlify.app/)  
-🔗 [LinkedIn](https://www.linkedin.com/in/kush-raman-sinha-z52/) | [GitHub](https://github.com/KUSHx123)
+- **Kush**: [Email](mailto:your-email@example.com)
+- **GitHub**: [KUSHx123](https://github.com/KUSHx123)
