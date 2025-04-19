@@ -1,0 +1,19 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Heart Shape -->
+  <path 
+    d="M50 90C47.5 90 45 89 43 87.5C28 75.5 5 58 5 35C5 20 17 10 30 10C38 10 45 14 50 20C55 14 62 10 70 10C83 10 95 20 95 35C95 58 72 75.5 57 87.5C55 89 52.5 90 50 90Z"
+    fill="#E74C3C"
+    stroke="#C0392B"
+    stroke-width="3"
+  />
+  
+  <!-- Heartbeat Line -->
+  <path
+    d="M25 50H40L45 40L55 60L60 50H75"
+    fill="none"
+    stroke="#FFFFFF"
+    stroke-width="4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
