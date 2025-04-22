@@ -22,7 +22,7 @@ Hosted on Vercel
 - **Frontend**: React, TypeScript, Axios, Tailwind CSS
 - **Backend**: FastAPI (for model integration and API)
 - **Database**: Supabase (for storing user prediction data)
-- **Machine Learning**: Python, scikit-learn (Logistic Regression, Random Forest, Decision Tree Classifiers)
+- **Machine Learning**: Python, scikit-learn (Logistic Regression, Random Forest, SVC)
 - **Hosting**: Vercel (for frontend), GitHub (for version control)
 - **Version Control**: Git
 
